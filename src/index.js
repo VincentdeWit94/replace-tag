@@ -43,7 +43,12 @@ if(program.folder){
           var result = data.replace(regex, "$1:"+parsedPath.name+"\n");
 
           fs.writeFile(file, result, 'utf8', function (err) {
-             if (err) return console.log(err);
+             if (err) {
+               return console.log(err);
+             }
+             else {
+               console.log("File saved succesfully");
+             }
           });
         }
       });
