@@ -29,15 +29,19 @@ if(program.folder){
 
       var file = program.folder + "/" + file;
       console.log('Trying to open file:', file);
+
       fs.readFile(file, 'utf8', function (err,data) {
+
         if (err) {
           return console.log(err);
         }
 
-        var regex = new RegExp("(?:^|\s):("+program.tag+"):(.*?)(?:\s|$)/gm");
+        var regex = new RegExp("("+program.tag+"):(.*?)(?:\\s|$)");
         var parsedPath = path.parse(file);
+
         if (parsedPath) {
-          var result = data.replace(regex, "$1"+parsedPath.name);
+          var result = data.replace(regex, "$1:"+parsedPath.name+"\n");
+
           fs.writeFile(file, result, 'utf8', function (err) {
              if (err) return console.log(err);
           });
